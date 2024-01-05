@@ -7,18 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B3EB1D02B46FFB90036C54A /* SpotifyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3EB1CF2B46FFB90036C54A /* SpotifyApi.swift */; };
+		5B3EB1D22B47056A0036C54A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3EB1D12B47056A0036C54A /* NetworkError.swift */; };
 		5B6CAEBA2B32EA910092C8A4 /* BeatMotionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6CAEB92B32EA910092C8A4 /* BeatMotionApp.swift */; };
 		5B6CAEBC2B32EA910092C8A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6CAEBB2B32EA910092C8A4 /* ContentView.swift */; };
 		5B6CAEBE2B32EA920092C8A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B6CAEBD2B32EA920092C8A4 /* Assets.xcassets */; };
 		5B6CAEC12B32EA920092C8A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B6CAEC02B32EA920092C8A4 /* Preview Assets.xcassets */; };
+		5B909FB22B44BA0400D07B58 /* SpotifyAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB12B44BA0400D07B58 /* SpotifyAuth.swift */; };
+		5B909FB42B44BBA400D07B58 /* SpotifyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB32B44BBA400D07B58 /* SpotifyConstants.swift */; };
+		5B909FB62B44C15E00D07B58 /* ViewModelBM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB52B44C15E00D07B58 /* ViewModelBM.swift */; };
+		5B909FB82B44C1C800D07B58 /* ModelBM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB72B44C1C800D07B58 /* ModelBM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B3EB1CF2B46FFB90036C54A /* SpotifyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApi.swift; sourceTree = "<group>"; };
+		5B3EB1D12B47056A0036C54A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		5B6CAEB62B32EA910092C8A4 /* BeatMotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B6CAEB92B32EA910092C8A4 /* BeatMotionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMotionApp.swift; sourceTree = "<group>"; };
 		5B6CAEBB2B32EA910092C8A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5B6CAEBD2B32EA920092C8A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B6CAEC02B32EA920092C8A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5B909FB12B44BA0400D07B58 /* SpotifyAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuth.swift; sourceTree = "<group>"; };
+		5B909FB32B44BBA400D07B58 /* SpotifyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyConstants.swift; sourceTree = "<group>"; };
+		5B909FB52B44C15E00D07B58 /* ViewModelBM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBM.swift; sourceTree = "<group>"; };
+		5B909FB72B44C1C800D07B58 /* ModelBM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBM.swift; sourceTree = "<group>"; };
+		5B909FD52B45AE2B00D07B58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +64,12 @@
 		5B6CAEB82B32EA910092C8A4 /* BeatMotion */ = {
 			isa = PBXGroup;
 			children = (
+				5B909FD52B45AE2B00D07B58 /* Info.plist */,
+				5B909FB02B44B9E500D07B58 /* SpotifyApi */,
+				5B909FAF2B44B9C600D07B58 /* ViewModel */,
+				5B909FAE2B44B9C000D07B58 /* Model */,
+				5B909FAD2B44B9AD00D07B58 /* View */,
 				5B6CAEB92B32EA910092C8A4 /* BeatMotionApp.swift */,
-				5B6CAEBB2B32EA910092C8A4 /* ContentView.swift */,
 				5B6CAEBD2B32EA920092C8A4 /* Assets.xcassets */,
 				5B6CAEBF2B32EA920092C8A4 /* Preview Content */,
 			);
@@ -65,6 +82,41 @@
 				5B6CAEC02B32EA920092C8A4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5B909FAD2B44B9AD00D07B58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5B6CAEBB2B32EA910092C8A4 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5B909FAE2B44B9C000D07B58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B909FB72B44C1C800D07B58 /* ModelBM.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5B909FAF2B44B9C600D07B58 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5B909FB52B44C15E00D07B58 /* ViewModelBM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5B909FB02B44B9E500D07B58 /* SpotifyApi */ = {
+			isa = PBXGroup;
+			children = (
+				5B909FB12B44BA0400D07B58 /* SpotifyAuth.swift */,
+				5B3EB1CF2B46FFB90036C54A /* SpotifyApi.swift */,
+				5B909FB32B44BBA400D07B58 /* SpotifyConstants.swift */,
+				5B3EB1D12B47056A0036C54A /* NetworkError.swift */,
+			);
+			path = SpotifyApi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +189,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B3EB1D02B46FFB90036C54A /* SpotifyApi.swift in Sources */,
+				5B3EB1D22B47056A0036C54A /* NetworkError.swift in Sources */,
+				5B909FB42B44BBA400D07B58 /* SpotifyConstants.swift in Sources */,
+				5B909FB22B44BA0400D07B58 /* SpotifyAuth.swift in Sources */,
+				5B909FB62B44C15E00D07B58 /* ViewModelBM.swift in Sources */,
 				5B6CAEBC2B32EA910092C8A4 /* ContentView.swift in Sources */,
+				5B909FB82B44C1C800D07B58 /* ModelBM.swift in Sources */,
 				5B6CAEBA2B32EA910092C8A4 /* BeatMotionApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,8 +330,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMotion/Preview Content\"";
+				DEVELOPMENT_TEAM = 6XSZZM3G59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeatMotion/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -300,8 +360,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMotion/Preview Content\"";
+				DEVELOPMENT_TEAM = 6XSZZM3G59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeatMotion/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
