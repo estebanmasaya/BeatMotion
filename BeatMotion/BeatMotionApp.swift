@@ -11,16 +11,7 @@ import SwiftUI
 struct BeatMotionApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(ViewModelBM()).onOpenURL { url in
-                print("Si se trigguea!")
-                if url.scheme == "beat-motion-app-login" && url.host == "callback" {
-                    // Handle the redirect URL here
-                    print("Received callback: \(url)")
-
-                    // Perform actions based on the URL
-                    // For example, navigate to a specific view or trigger some logic
-                }
-            }
+            MenuView().environmentObject(ViewModelBM())
         }
     }
 }

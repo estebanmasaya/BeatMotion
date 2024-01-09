@@ -10,7 +10,7 @@ import Foundation
 enum SpotifyConstants{
     static let apiHost = "api.spotify.com"
     static let clientId = "63e605058e294f4e86f97cf2b7664d4d"
-    static let redirectUri = "https://www.google.com/"
+    static let redirectUri = "https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
     static let authorizationEndpoint = "accounts.spotify.com"
     static let tokenEndpoint = "https://accounts.spotify.com/api/token"
     static let scope = "user-modify-playback-state user-read-playback-state user-read-currently-playing"

@@ -106,6 +106,28 @@ class SpotifyApi{
         return urlRequest
         
     }
+
+    static private func createURLGetRemainingTimeCurrentlyPlayingTrack(tokenString: String) -> URLRequest?{
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = SpotifyConstants.apiHost
+        components.path = "/v1/me/player/currently-playing"
+        
+        guard let url = components.url else {return nil}
+        
+        var urlRequest = URLRequest(url: url)
+        
+        urlRequest.addValue("Bearer " + tokenString, forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        urlRequest.httpMethod = "GET"
+        
+        return urlRequest
+        
+    }
+
+
+    
     
     
     static private func createURLRequestAddItemToPlaybackQueue(tokenString: String, trackUrl: String) -> URLRequest? {
@@ -128,6 +150,24 @@ class SpotifyApi{
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
         return urlRequest
+    }
+    
+    
+    static func getRemainingTimeCurrentlyPlayingTrack(tokenString: String) async throws -> Int{
+        guard let urlRequest = createURLGetRemainingTimeCurrentlyPlayingTrack(tokenString: tokenString) else {throw NetworkError.invalidURL}
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        let decoder = JSONDecoder()
+        //let results = try decoder.decode(Response.self, from: data)
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("Raw JSON Response: \(jsonString)")
+        }
+        
+        let currentlyPlaying = try decoder.decode(Currently.self, from: data)
+        print(currentlyPlaying)
+        let remainingTimeMs = currentlyPlaying.item.duration_ms - currentlyPlaying.progress_ms
+        print("Remaining time: \(remainingTimeMs)")
+        return remainingTimeMs
     }
 
     
@@ -159,6 +199,16 @@ class SpotifyApi{
     struct External_urls: Codable{
         let spotify: String
     }
+    
+    struct Currently: Codable {
+        let progress_ms: Int
+        let item: Item
+    }
+    
+    struct Item: Codable{
+        let duration_ms: Int
+    }
+    
     
     
 }
