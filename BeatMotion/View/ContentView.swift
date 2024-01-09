@@ -36,6 +36,13 @@ struct ContentView: View {
                 
             }
             
+            Button("Get Currently Playing") {
+                Task{
+                    await theViewModel.fetchRemainingTimeCurrentlyPlayingTrack()
+                }
+                
+            }
+            
             Button("Choose next song") {
                 Task{
                     await theViewModel.chooseNextTrack()
@@ -80,7 +87,7 @@ struct WebView: UIViewRepresentable{
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("DIDFINISHED!")
             guard let urlString = webView.url?.absoluteString else {return}
-            if urlString.contains("https://www.google.com/#access_token="){
+            if urlString.contains("https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png#access_token="){
                 print("SIII")
                 theViewModel.userAgreed = false
                 theViewModel.extractTokenfronUrl(urlString: urlString)

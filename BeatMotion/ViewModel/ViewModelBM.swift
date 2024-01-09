@@ -23,6 +23,10 @@ class ViewModelBM: ObservableObject{
     @Published var codeChallenge : String?
     var bpm: Int{
         theModel.bpm
+    }    
+    
+    var nextTrackId: String{
+        theModel.nextTrackId
     }
     
     func updateLoginUrl(){
@@ -31,7 +35,8 @@ class ViewModelBM: ObservableObject{
     }
     
     func extractTokenfronUrl(urlString: String){
-        let range = urlString.range(of: "https://www.google.com/#access_token=")
+        print("stringurl: \(urlString)")
+        let range = urlString.range(of: "https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png#access_token=")
         guard let index = range?.upperBound else {return}
         tokenString = String(urlString[index...])
         if !tokenString.isEmpty{
@@ -66,6 +71,17 @@ class ViewModelBM: ObservableObject{
             print("Error fetching recommendations: \(error)")
         }
     }
+
+    func fetchRemainingTimeCurrentlyPlayingTrack() async {
+        do {
+            let remainingTime = try await SpotifyApi.getRemainingTimeCurrentlyPlayingTrack(tokenString: tokenString)
+
+        } catch {
+            print("Error fetching currentlyPlayingTrack: \(error)")
+        }
+    }
+    
+    
     
     func startPlayback() async {
         do{
