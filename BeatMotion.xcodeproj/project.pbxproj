@@ -17,6 +17,7 @@
 		5B909FB42B44BBA400D07B58 /* SpotifyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB32B44BBA400D07B58 /* SpotifyConstants.swift */; };
 		5B909FB62B44C15E00D07B58 /* ViewModelBM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB52B44C15E00D07B58 /* ViewModelBM.swift */; };
 		5B909FB82B44C1C800D07B58 /* ModelBM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB72B44C1C800D07B58 /* ModelBM.swift */; };
+		85A9711A2B4AF8D8000AF1E5 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A971192B4AF8D8000AF1E5 /* WorkoutManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		5B909FB52B44C15E00D07B58 /* ViewModelBM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBM.swift; sourceTree = "<group>"; };
 		5B909FB72B44C1C800D07B58 /* ModelBM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBM.swift; sourceTree = "<group>"; };
 		5B909FD52B45AE2B00D07B58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		85A971192B4AF8D8000AF1E5 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				5B909FB72B44C1C800D07B58 /* ModelBM.swift */,
+				85A971192B4AF8D8000AF1E5 /* WorkoutManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				5B909FB42B44BBA400D07B58 /* SpotifyConstants.swift in Sources */,
 				5B909FB22B44BA0400D07B58 /* SpotifyAuth.swift in Sources */,
 				5B909FB62B44C15E00D07B58 /* ViewModelBM.swift in Sources */,
+				85A9711A2B4AF8D8000AF1E5 /* WorkoutManager.swift in Sources */,
 				5B6CAEBC2B32EA910092C8A4 /* ContentView.swift in Sources */,
 				5B909FB82B44C1C800D07B58 /* ModelBM.swift in Sources */,
 				5B6CAEBA2B32EA910092C8A4 /* BeatMotionApp.swift in Sources */,
@@ -327,24 +331,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BeatMotion/BeatMotion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMotion/Preview Content\"";
-				DEVELOPMENT_TEAM = 6XSZZM3G59;
+				DEVELOPMENT_TEAM = MTP3D43XNX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeatMotion/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Our app needs to read some health values";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Our app uses your step count and workout data to provide personalized fitness tracking and recommendations";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Our app needs to write workouts and step count data to your Health app to track your fitness activities and goals.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion data to track your steps and physical activity.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kth.estmm.BeatMotion;
+				PRODUCT_BUNDLE_IDENTIFIER = BeatMotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -357,24 +367,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BeatMotion/BeatMotion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMotion/Preview Content\"";
-				DEVELOPMENT_TEAM = 6XSZZM3G59;
+				DEVELOPMENT_TEAM = MTP3D43XNX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeatMotion/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Our app needs to read some health values";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Our app uses your step count and workout data to provide personalized fitness tracking and recommendations";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Our app needs to write workouts and step count data to your Health app to track your fitness activities and goals.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion data to track your steps and physical activity.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kth.estmm.BeatMotion;
+				PRODUCT_BUNDLE_IDENTIFIER = BeatMotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

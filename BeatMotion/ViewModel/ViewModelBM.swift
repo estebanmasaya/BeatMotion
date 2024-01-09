@@ -7,15 +7,17 @@
 
 import Foundation
 
-class ViewModelBM: ObservableObject{
+class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
     @Published private var theModel: ModelBM
     @Published var loginURL: URLRequest?
     @Published var userAgreed = false
     private var tokenString = ""
-    
+    private var workoutManager = WorkoutManager()
     
     init() {
         theModel = ModelBM()
+        workoutManager.delegate = self
+        workoutManager.startWorkout()
     }
   
     @Published var codeVerifier : String?
@@ -68,6 +70,7 @@ class ViewModelBM: ObservableObject{
     }
     
     func startPlayback() async {
+        workoutManager.startWorkout()
         do{
             try await SpotifyApi.startPlayback(tokenString: tokenString)
             print("PLAY!")
@@ -85,6 +88,11 @@ class ViewModelBM: ObservableObject{
         }
     }
     
-    
+    func didUpdateStepsPerMinute(_ stepsPerMinute: Double) {
+        print("stepsPerMinute + \(stepsPerMinute)")
+        DispatchQueue.main.async {
+            self.theModel.updateBPM(to: Int(stepsPerMinute))
+        }
+    }
     
 }

@@ -7,13 +7,11 @@
 
 import Foundation
 
-
 struct ModelBM{
     private (set) var bpm = 90
     
-    
-    
-    
-    
+    mutating func updateBPM(to newValue: Int) {
+        bpm = newValue
+    }
     
 }
