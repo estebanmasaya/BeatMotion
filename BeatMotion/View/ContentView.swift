@@ -29,7 +29,7 @@ struct ContentView: View {
                 }
                 
             }
-                        Button("Play") {
+            Button("Play") {
                 Task{
                     await theViewModel.startPlayback()
                 }
@@ -48,7 +48,7 @@ struct ContentView: View {
                     await theViewModel.chooseNextTrack()
                 }
             }.padding()
-            
+            Text("steps per minute: \(theViewModel.bpm)")
             
         }
         .padding()

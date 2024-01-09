@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct ModelBM{
     private (set) var bpm = 90
     private (set) var nextTrackId : String = ""
@@ -16,7 +15,8 @@ struct ModelBM{
         nextTrackId = trackId;
     }
     
-    
-    
+    mutating func updateBPM(to newValue: Int) {
+        bpm = newValue
+    }
     
 }
