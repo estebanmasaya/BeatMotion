@@ -46,8 +46,8 @@ struct MenuView: View {
                     Text("🏃🏻‍♂️🎧").font(.system(size: 70))
                     Spacer()
                     VStack{
-                        NavigationLink(destination: ContentView().onAppear{
-                            
+                        NavigationLink(destination: ContentView().onDisappear(){
+                            self.theViewModel.endWorkout()
                         }
                         ){
                             Text("Start Training Pass").font(.title)

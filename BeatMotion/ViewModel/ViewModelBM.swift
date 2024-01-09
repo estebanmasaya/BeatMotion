@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
+class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
     @Published private var theModel: ModelBM
     @Published var loginURL: URLRequest?
     @Published var userAgreed = false
@@ -111,4 +111,14 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
         }
     }
     
+    func endWorkout() {
+        workoutManager.endWorkout()
+    }
+    
+    func notifyToFetchNewRecomendation() {
+        
+        Task {
+            await fetchRecommendations()
+        }
+    }
 }
