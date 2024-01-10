@@ -66,3 +66,24 @@ class WorkoutManager {
         pedometer.stopUpdates()
     }
 }
+
+/*
+ 
+ if CMPedometer.isCadenceAvailable() {
+     self.pedometer.startUpdates(from: Date()) { [weak self] pedometerData, error in
+         if let error = error {
+             print("Pedometer error: \(error.localizedDescription)")
+             return
+         }
+
+         if let cadence = pedometerData?.currentCadence?.doubleValue {
+             // Cadence is in steps per second, convert to steps per minute
+             let cadencePerMinute = cadence * 60
+             print("Current Cadence: \(cadencePerMinute) steps per minute")
+
+             self?.delegate?.didUpdateCadence(cadencePerMinute)
+         }
+     }
+ }
+ 
+ */
