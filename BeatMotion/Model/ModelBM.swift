@@ -17,6 +17,7 @@ struct ModelBM{
     private let thresholdPercentage: Double = 10.0
     private let windowSize: Int = 10  // Size of the rolling window
     private (set) var nextTrackId : String = ""
+    private (set) var message : String = ""
 
     private (set) var currentlyPlayingTrack: SpotifyApi.Currently = SpotifyApi.Currently()
     private (set) var isPlaying = false
@@ -27,7 +28,10 @@ struct ModelBM{
         guard !recentBPMs.isEmpty else { return 90 }
         return recentBPMs.reduce(0, +) / recentBPMs.count
     }
-
+    
+    mutating func setMessage(message: String) {
+        self.message = message
+    }
     
     
     mutating func setNextTrack(trackId: String){
@@ -46,6 +50,7 @@ struct ModelBM{
         if changePercentage > thresholdPercentage {
             // Trigger your action here
             print("Change exceeds 10% threshold")
+            message = "Running Faster? We choose the right track for you!"
             self.delegate?.notifyToFetchNewRecomendation()
         }
 

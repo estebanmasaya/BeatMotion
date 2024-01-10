@@ -26,6 +26,10 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
     var bpm: Int{
         theModel.bpm
     }
+
+    var message: String{
+        theModel.message
+    }
     
     var nextTrackId: String{
         theModel.nextTrackId
@@ -94,7 +98,6 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
     }
     
     func fetchCurrentlyPlayingTrackWithTimer() {
-        print()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             DispatchQueue.main.async {
                 Task {
@@ -105,7 +108,7 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
                         if self.calculateRemainingTime()<3000{
                             do {
                                 let songs = try await SpotifyApi.getRecommendations(tokenString: self.tokenString, bpm: self.bpm)
-                                print(songs)
+                                //print(songs)
                             } catch {
                                 print("Error fetching recommendations: \(error)")
                             }
@@ -243,6 +246,13 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
     func notifyToFetchNewRecomendation() {
         Task {
             await fetchRecommendations()
+        }
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false){ timer in
+            DispatchQueue.main.async {
+                print("Erase")
+                self.theModel.setMessage(message: "")
+            }
+            
         }
     }
     
