@@ -18,25 +18,41 @@ class WorkoutManager {
 
     func startWorkout() {
         // Check if step counting is available
-        
         if CMPedometer.isStepCountingAvailable() {
             print("Starting pedometer updates...")
+            
+            // Define the update interval (e.g., every 10 seconds)
+            let updateInterval = 10.0 // seconds
+
+            // Store the last update time and step count
+            var lastUpdateTime = Date()
+            var lastStepCount = 0.0
+
             // Start receiving updates
             pedometer.startUpdates(from: Date()) { [weak self] pedometerData, error in
                 if let error = error {
                     print("Pedometer error: \(error.localizedDescription)")
                     return
                 }
+
                 if let data = pedometerData {
-                    // Calculate steps per minute
+                    let now = Date()
                     let steps = data.numberOfSteps.doubleValue
-                    let duration = data.endDate.timeIntervalSince(data.startDate) / 60 // Duration in minutes
-                    let stepsPerMinute = duration > 0 ? steps / duration : 0
-                    print("Steps: \(steps), Duration: \(duration) minutes, Steps per minute: \(stepsPerMinute)")
-                    
-                    
+                    let duration = now.timeIntervalSince(lastUpdateTime) / 60 // Duration in minutes
+
+                    // Calculate steps since last update
+                    let stepsSinceLastUpdate = steps - lastStepCount
+
+                    // Update steps per minute based on recent activity
+                    let stepsPerMinute = duration > 0 ? stepsSinceLastUpdate / duration : 0
+
+                    //print("Recent Steps: \(stepsSinceLastUpdate), Recent Duration: \(duration) minutes, Recent Steps per minute: \(stepsPerMinute)")
+
+                    // Update last update time and step count
+                    lastUpdateTime = now
+                    lastStepCount = steps
+
                     self?.delegate?.didUpdateStepsPerMinute(stepsPerMinute)
-                    
                 }
             }
         } else {
@@ -45,6 +61,7 @@ class WorkoutManager {
     }
 
     func endWorkout() {
+        print("stopping pedometer updates")
         // Stop pedometer updates
         pedometer.stopUpdates()
     }

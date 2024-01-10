@@ -20,6 +20,7 @@
 		5B909FB42B44BBA400D07B58 /* SpotifyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB32B44BBA400D07B58 /* SpotifyConstants.swift */; };
 		5B909FB62B44C15E00D07B58 /* ViewModelBM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB52B44C15E00D07B58 /* ViewModelBM.swift */; };
 		5B909FB82B44C1C800D07B58 /* ModelBM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B909FB72B44C1C800D07B58 /* ModelBM.swift */; };
+		856D98AA2B4E8815003D9F3A /* ChoseBPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856D98A92B4E8815003D9F3A /* ChoseBPM.swift */; };
 		85A9711A2B4AF8D8000AF1E5 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A971192B4AF8D8000AF1E5 /* WorkoutManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		5B909FB52B44C15E00D07B58 /* ViewModelBM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBM.swift; sourceTree = "<group>"; };
 		5B909FB72B44C1C800D07B58 /* ModelBM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBM.swift; sourceTree = "<group>"; };
 		5B909FD52B45AE2B00D07B58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		856D98A92B4E8815003D9F3A /* ChoseBPM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoseBPM.swift; sourceTree = "<group>"; };
 		85A971192B4AF8D8000AF1E5 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				5B3EB1D32B4C81DF0036C54A /* MenuView.swift */,
 				5B3EB1D52B4C83A00036C54A /* DataPresentationView.swift */,
 				5B0872FF2B4DD99000C0379B /* OperationIconView.swift */,
+				856D98A92B4E8815003D9F3A /* ChoseBPM.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				85A9711A2B4AF8D8000AF1E5 /* WorkoutManager.swift in Sources */,
 				5B6CAEBC2B32EA910092C8A4 /* ContentView.swift in Sources */,
 				5B909FB82B44C1C800D07B58 /* ModelBM.swift in Sources */,
+				856D98AA2B4E8815003D9F3A /* ChoseBPM.swift in Sources */,
 				5B6CAEBA2B32EA910092C8A4 /* BeatMotionApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BeatMotion/BeatMotion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -379,6 +384,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BeatMotion/BeatMotion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

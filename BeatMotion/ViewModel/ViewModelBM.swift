@@ -7,19 +7,12 @@
 
 import Foundation
 
-class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
-    @Published private var theModel: ModelBM
+class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
+    @Published var theModel: ModelBM
     @Published var loginURL: URLRequest?
     @Published var userAgreed = false
     private var tokenString = ""
     private var workoutManager = WorkoutManager()
-    
-    init() {
-        theModel = ModelBM()
-        workoutManager.delegate = self
-        workoutManager.startWorkout()
-    }
-  
     @Published var codeVerifier : String?
     @Published var hashed : Data?
     @Published var codeChallenge : String?
@@ -27,10 +20,11 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
     var isPlaying: Bool{
         theModel.isPlaying
     }
+    @Published var sliderValue: Double = 90
     
     var bpm: Int{
         theModel.bpm
-    }    
+    }
     
     var nextTrackId: String{
         theModel.nextTrackId
@@ -38,6 +32,10 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
     
     var currentlyPlayingTrack: SpotifyApi.Currently{
         theModel.currentlyPlayingTrack
+
+    init() {
+        theModel = ModelBM()
+        workoutManager.delegate = self
     }
     
     func updateLoginUrl(){
@@ -57,8 +55,6 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
             tokenString = String(tokenString[..<index])
             print(tokenString)
         }
-        
-        
     }
     
     func chooseNextTrack() async {
@@ -187,4 +183,21 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
         }
     }
     
+    func endWorkout() {
+        workoutManager.endWorkout()
+    }
+    
+    func startWorkout() {
+        workoutManager.startWorkout()
+    }
+    
+    func notifyToFetchNewRecomendation() {
+        Task {
+            await fetchRecommendations()
+        }
+    }
+    
+    func setBpm(_ value: Double) {
+        theModel.updateBPM(to: Int(value))
+    }
 }

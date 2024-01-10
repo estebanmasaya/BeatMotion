@@ -46,14 +46,33 @@ struct MenuView: View {
                     Text("🏃🏻‍♂️🎧").font(.system(size: 70))
                     Spacer()
                     VStack{
-                        NavigationLink(destination: DataPresentationView().onAppear{
-                            Task{
+
+
+                        NavigationLink(destination: DataPresentationView().onDisappear(){
+                            self.theViewModel.endWorkout()
+                        }.onAppear(){
+                            self.theViewModel.startWorkout()
+                                                      Task{
                                 await theViewModel.startPlaybackInFirstAvailableDevice()
                                 await theViewModel.fetchCurrentlyPlayingTrack()
                             }  
                         }
                         ){
-                            Text("Start Training Pass").font(.title)
+                            Text("Start Training with dynamic BPM").font(.title)
+                        }
+                        .foregroundColor(Color(red: 66/255, green: 139/255, blue: 221/255))
+                        .padding(5)
+                        .background(.white)
+                        .cornerRadius(8)
+                        
+                        NavigationLink(destination: ContentView().onDisappear(){
+                            self.theViewModel.endWorkout()
+                        }.onAppear(){
+                            self.theViewModel.setBpm(theViewModel.sliderValue)
+                            //start playing songs
+                        }
+                        ){
+                            Text("Start Training with chosen BPM").font(.title)
                         }
                         .foregroundColor(Color(red: 66/255, green: 139/255, blue: 221/255))
                         .padding(5)
@@ -83,9 +102,16 @@ struct MenuView: View {
                         .padding(5)
                         .background(.white)
                         .cornerRadius(8)
-                         
+                        
+                        ChoseBPM(theViewModel: _theViewModel)
+                            .frame(width: 200, height: 75)
+                            .foregroundColor(Color(red: 66/255, green: 139/255, blue: 221/255))
+                            .padding(6)
+                            .background(.white)
+                            .cornerRadius(8)
                     }
                     .padding()
+                    
                 }
             }
         }
