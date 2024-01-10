@@ -8,27 +8,27 @@
 import Foundation
 
 class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
-    @Published private var theModel: ModelBM
+    @Published var theModel: ModelBM
     @Published var loginURL: URLRequest?
     @Published var userAgreed = false
     private var tokenString = ""
     private var workoutManager = WorkoutManager()
+    @Published var codeVerifier : String?
+    @Published var hashed : Data?
+    @Published var codeChallenge : String?
+    @Published var sliderValue: Double = 90
+    
+    var bpm: Int{
+        theModel.bpm
+    }
+    
+    var nextTrackId: String{
+        theModel.nextTrackId
+    }
     
     init() {
         theModel = ModelBM()
         workoutManager.delegate = self
-        workoutManager.startWorkout()
-    }
-  
-    @Published var codeVerifier : String?
-    @Published var hashed : Data?
-    @Published var codeChallenge : String?
-    var bpm: Int{
-        theModel.bpm
-    }    
-    
-    var nextTrackId: String{
-        theModel.nextTrackId
     }
     
     func updateLoginUrl(){
@@ -47,8 +47,6 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
             tokenString = String(tokenString[..<index])
             print(tokenString)
         }
-        
-        
     }
     
     func chooseNextTrack() async {
@@ -83,8 +81,6 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
         }
     }
     
-    
-    
     func startPlayback() async {
         workoutManager.startWorkout()
         do{
@@ -115,10 +111,17 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
         workoutManager.endWorkout()
     }
     
+    func startWorkout() {
+        workoutManager.startWorkout()
+    }
+    
     func notifyToFetchNewRecomendation() {
-        
         Task {
             await fetchRecommendations()
         }
+    }
+    
+    func setBpm(_ value: Double) {
+        theModel.updateBPM(to: Int(value))
     }
 }
