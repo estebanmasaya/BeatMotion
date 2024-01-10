@@ -48,14 +48,17 @@ struct MenuView: View {
                     VStack{
 
 
-                        NavigationLink(destination: DataPresentationView().onDisappear(){
-                            self.theViewModel.endWorkout()
+                        NavigationLink(destination: DataPresentationView()
+                            .onDisappear(){
+                                self.theViewModel.invalidateTimer()
+                                self.theViewModel.endWorkout()
                         }.onAppear(){
                             self.theViewModel.startWorkout()
-                                                      Task{
+                            Task{
                                 await theViewModel.startPlaybackInFirstAvailableDevice()
-                                await theViewModel.fetchCurrentlyPlayingTrack()
-                            }  
+                                await theViewModel.fetchCurrentlyPlayingTrackWithTimer()
+                                
+                            }
                         }
                         ){
                             Text("Start Training with dynamic BPM")
@@ -66,9 +69,19 @@ struct MenuView: View {
                         .cornerRadius(8)
                         
                         NavigationLink(destination: DataPresentationView().onDisappear(){
+                            self.theViewModel.invalidateTimer()
+
                             self.theViewModel.endWorkout()
                         }.onAppear(){
                             self.theViewModel.setBpm(theViewModel.sliderValue)
+                            
+                            Task{
+                                await theViewModel.fetchCurrentlyPlayingTrackWithTimer()
+                                await theViewModel.startPlaybackInFirstAvailableDevice()
+
+
+                            }
+
                             //start playing songs
                         }
                         ){

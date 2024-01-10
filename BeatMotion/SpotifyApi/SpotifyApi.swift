@@ -133,7 +133,7 @@ class SpotifyApi{
         URLQueryItem(name: "min_tempo", value: String(bpm - 5)),
         URLQueryItem(name: "max_tempo", value: String(bpm + 5)),
         URLQueryItem(name: "seed_genres", value: "work-out,groove,house,pop"),
-        URLQueryItem(name: "limit", value: "20")
+        URLQueryItem(name: "limit", value: "1")
         ]
         
         guard let url = components.url else {return nil}

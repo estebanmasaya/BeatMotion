@@ -27,6 +27,7 @@ struct ModelBM{
         guard !recentBPMs.isEmpty else { return 90 }
         return recentBPMs.reduce(0, +) / recentBPMs.count
     }
+
     
     
     mutating func setNextTrack(trackId: String){

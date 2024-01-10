@@ -59,6 +59,7 @@ struct DataPresentationView: View {
                     
                     Text(theViewModel.currentlyPlayingTrack.item.name)
                     Text(theViewModel.currentlyPlayingTrack.item.artists.map { $0.name }.joined(separator: ", "))
+                    Text(" Remaining time -\(theViewModel.millisecondsToMinutesSeconds(milliseconds: theViewModel.currentlyPlayingTrack.item.duration_ms - theViewModel.currentlyPlayingTrack.progress_ms))") 
                     
                     HStack{
                         

@@ -16,6 +16,7 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
     @Published var codeVerifier : String?
     @Published var hashed : Data?
     @Published var codeChallenge : String?
+    private var timer: Timer?
     
     var isPlaying: Bool{
         theModel.isPlaying
@@ -44,6 +45,7 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
         codeChallenge = SpotifyAuth.generateCodeChallenge()
         loginURL = SpotifyAuth.getLoginURL(codeChallenge: codeChallenge!)
     }
+    
     
     
     func extractTokenfronUrl(urlString: String){
@@ -90,7 +92,51 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
             print("Error fetching currentlyPlayingTrack: \(error)")
         }
     }
+    
+    func fetchCurrentlyPlayingTrackWithTimer() {
+        print()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            DispatchQueue.main.async {
+                Task {
+                    do {
+                        let currentlyPlaying = try await SpotifyApi.getCurrentlyPlayingTrack(tokenString: self.tokenString)
+                        self.theModel.setCurrentlyPlayingTrack(track: currentlyPlaying)
+                        
+                        if self.calculateRemainingTime()<3000{
+                            do {
+                                let songs = try await SpotifyApi.getRecommendations(tokenString: self.tokenString, bpm: self.bpm)
+                                print(songs)
+                            } catch {
+                                print("Error fetching recommendations: \(error)")
+                            }
+                        }
+                        
+                        
+                    } catch {
+                        print("Error fetching currentlyPlayingTrack: \(error)")
+                    }
+                }
+            }
+        }
+    }
 
+    func calculateRemainingTime() -> Int {
+        return theModel.currentlyPlayingTrack.item.duration_ms - theModel.currentlyPlayingTrack.progress_ms
+        
+    }
+    
+    func invalidateTimer() {
+        timer?.invalidate()
+        
+    }
+    
+    func millisecondsToMinutesSeconds(milliseconds: Int) -> String {
+            let totalSeconds = milliseconds / 1000
+            let minutes = totalSeconds / 60
+            let seconds = totalSeconds % 60
+            return "\(minutes):\(String(format: "%02d", seconds))"
+    }
+    
     func startPlayback() async {
         workoutManager.startWorkout()
         do{
