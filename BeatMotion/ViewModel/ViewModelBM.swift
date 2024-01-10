@@ -23,6 +23,11 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
     @Published var codeVerifier : String?
     @Published var hashed : Data?
     @Published var codeChallenge : String?
+    
+    var isPlaying: Bool{
+        theModel.isPlaying
+    }
+    
     var bpm: Int{
         theModel.bpm
     }    
@@ -31,10 +36,15 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
         theModel.nextTrackId
     }
     
+    var currentlyPlayingTrack: SpotifyApi.Currently{
+        theModel.currentlyPlayingTrack
+    }
+    
     func updateLoginUrl(){
         codeChallenge = SpotifyAuth.generateCodeChallenge()
         loginURL = SpotifyAuth.getLoginURL(codeChallenge: codeChallenge!)
     }
+    
     
     func extractTokenfronUrl(urlString: String){
         print("stringurl: \(urlString)")
@@ -74,25 +84,91 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate{
         }
     }
 
-    func fetchRemainingTimeCurrentlyPlayingTrack() async {
+    func fetchCurrentlyPlayingTrack() async {
         do {
-            let remainingTime = try await SpotifyApi.getRemainingTimeCurrentlyPlayingTrack(tokenString: tokenString)
-
+            let currentlyPlaying = try await SpotifyApi.getCurrentlyPlayingTrack(tokenString: tokenString)
+            theModel.setCurrentlyPlayingTrack(track: currentlyPlaying)
         } catch {
             print("Error fetching currentlyPlayingTrack: \(error)")
         }
     }
-    
-    
-    
+
     func startPlayback() async {
         workoutManager.startWorkout()
         do{
-            try await SpotifyApi.startPlayback(tokenString: tokenString)
+            try await theModel.setIsPlaying(SpotifyApi.getCurrentlyPlayingTrack(tokenString: tokenString).is_playing)
+        } catch{
+            print("Not able to start Playback")
+        }
+        
+        do{
+                
+                try await SpotifyApi.startPlayback(tokenString: tokenString, deviceId: "", isPlaying: isPlaying)
+            theModel.togglePlay()
             print("PLAY!")
         } catch{
             print("Playback not working")
-        }  
+        }
+    }
+    
+    func forwardPlayback() async {
+        do {
+            let trackUrl = try await SpotifyApi.getRecommendations(tokenString: tokenString, bpm: bpm)
+            try await SpotifyApi.addItemToPlaybackQueue(tokenString: tokenString, trackUrl: trackUrl)
+            print("PLAY!")
+
+            // Use withThrowingTaskGroup to await the completion of all asynchronous operations
+            try await withThrowingTaskGroup(of: Void.self) { group in
+
+                // Forward playback
+                try await group.addTask {
+                    try await SpotifyApi.forward(tokenString: self.tokenString)
+                    print("Forward!")
+                }
+
+                // Fetch currently playing track after forward playback is complete
+                try await group.addTask {
+                    do {
+                        let currentlyPlaying = try await SpotifyApi.getCurrentlyPlayingTrack(tokenString: self.tokenString)
+                        self.theModel.setCurrentlyPlayingTrack(track: currentlyPlaying)
+                    } catch {
+                        print("Error fetching currentlyPlayingTrack: \(error)")
+                    }
+                }
+
+                // Wait for both tasks to complete
+                for try await _ in group { }
+
+            }
+        } catch {
+            print("Error in forwardPlayback: \(error)")
+        }
+    }
+
+    
+    func startPlaybackInFirstAvailableDevice() async {
+        workoutManager.startWorkout()
+        do{
+            try await theModel.setIsPlaying(SpotifyApi.getCurrentlyPlayingTrack(tokenString: tokenString).is_playing)
+        } catch{
+            print("Not able to start Playback")
+        }
+        do {
+            guard let deviceId = try await SpotifyApi.getDevices(tokenString: tokenString).devices.first?.id else { return}
+            
+            do{
+                try await SpotifyApi.startPlayback(tokenString: tokenString, deviceId: deviceId, isPlaying: isPlaying)
+                theModel.togglePlay()
+                print("PLAY!")
+            } catch{
+                print("Playback not working")
+            }
+            
+            
+        } catch {
+            print("Error fetching Devices: \(error)")
+        }
+ 
     }
 
     func addItemToPlaybackQueue(trackUrl: String) async {

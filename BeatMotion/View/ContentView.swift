@@ -22,7 +22,7 @@ struct ContentView: View {
             .sheet(isPresented: $theViewModel.userAgreed) {
                 WebView(theViewModel: theViewModel, url:  (theViewModel.loginURL?.url)!)
             }.padding()
-
+            
             Button("Fetch recommendations") {
                 Task{
                     await theViewModel.fetchRecommendations()
@@ -31,14 +31,14 @@ struct ContentView: View {
             }
             Button("Play") {
                 Task{
-                    await theViewModel.startPlayback()
+                    await theViewModel.startPlaybackInFirstAvailableDevice()
                 }
                 
             }
             
             Button("Get Currently Playing") {
                 Task{
-                    await theViewModel.fetchRemainingTimeCurrentlyPlayingTrack()
+                    await theViewModel.fetchCurrentlyPlayingTrack()
                 }
                 
             }
@@ -52,7 +52,59 @@ struct ContentView: View {
             
         }
         .padding()
+        
+        if let imageUrlString = theViewModel.currentlyPlayingTrack.item.album.images.first?.url,
+           let imageUrl = URL(string: imageUrlString) {
+            // Code inside this block will execute if both optionals are successfully unwrapped
+            // imageUrlString and imageUrl are non-nil within this block
+            AsyncImage(url: imageUrl) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                case .failure:
+                    Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                @unknown default:
+                    EmptyView()
+                }
+            }
+        } else {
+            // Provide a default value for imageUrlString if it's nil
+            let defaultImageUrlString = "https://example.com/defaultImage.jpg"
+            
+            // Use the defaultImageUrlString to create a URL
+            if let defaultImageUrl = URL(string: defaultImageUrlString) {
+                // Handle the case where imageUrlString is nil, using the defaultImageUrl
+                AsyncImage(url: defaultImageUrl) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    case .failure:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .scaledToFit()
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+            } else {
+                // Handle the case where both imageUrlString and defaultImageUrlString are invalid
+                // Provide a fallback or handle the error as needed
+            }
+        }
+
+        
     }
+    
 }
 
 struct WebView: UIViewRepresentable{

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B0873002B4DD99000C0379B /* OperationIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0872FF2B4DD99000C0379B /* OperationIconView.swift */; };
 		5B3EB1D02B46FFB90036C54A /* SpotifyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3EB1CF2B46FFB90036C54A /* SpotifyApi.swift */; };
 		5B3EB1D22B47056A0036C54A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3EB1D12B47056A0036C54A /* NetworkError.swift */; };
 		5B3EB1D42B4C81DF0036C54A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3EB1D32B4C81DF0036C54A /* MenuView.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B0872FF2B4DD99000C0379B /* OperationIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationIconView.swift; sourceTree = "<group>"; };
 		5B3EB1CF2B46FFB90036C54A /* SpotifyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApi.swift; sourceTree = "<group>"; };
 		5B3EB1D12B47056A0036C54A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		5B3EB1D32B4C81DF0036C54A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				5B6CAEBB2B32EA910092C8A4 /* ContentView.swift */,
 				5B3EB1D32B4C81DF0036C54A /* MenuView.swift */,
 				5B3EB1D52B4C83A00036C54A /* DataPresentationView.swift */,
+				5B0872FF2B4DD99000C0379B /* OperationIconView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				5B909FB22B44BA0400D07B58 /* SpotifyAuth.swift in Sources */,
 				5B3EB1D42B4C81DF0036C54A /* MenuView.swift in Sources */,
 				5B909FB62B44C15E00D07B58 /* ViewModelBM.swift in Sources */,
+				5B0873002B4DD99000C0379B /* OperationIconView.swift in Sources */,
 				5B3EB1D62B4C83A00036C54A /* DataPresentationView.swift in Sources */,
 				85A9711A2B4AF8D8000AF1E5 /* WorkoutManager.swift in Sources */,
 				5B6CAEBC2B32EA910092C8A4 /* ContentView.swift in Sources */,
@@ -343,7 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMotion/Preview Content\"";
-				DEVELOPMENT_TEAM = MTP3D43XNX;
+				DEVELOPMENT_TEAM = 6XSZZM3G59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeatMotion/Info.plist;
@@ -362,7 +366,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = BeatMotion;
+				PRODUCT_BUNDLE_IDENTIFIER = BeatMotionApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -379,7 +383,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMotion/Preview Content\"";
-				DEVELOPMENT_TEAM = MTP3D43XNX;
+				DEVELOPMENT_TEAM = 6XSZZM3G59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeatMotion/Info.plist;
@@ -398,7 +402,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = BeatMotion;
+				PRODUCT_BUNDLE_IDENTIFIER = BeatMotionApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
