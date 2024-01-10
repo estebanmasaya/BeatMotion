@@ -17,6 +17,10 @@ struct ModelBM{
     private let thresholdPercentage: Double = 10.0
     private let windowSize: Int = 10  // Size of the rolling window
     private (set) var nextTrackId : String = ""
+
+    private (set) var currentlyPlayingTrack: SpotifyApi.Currently = SpotifyApi.Currently()
+    private (set) var isPlaying = false
+
     weak var delegate: ModelBMDelegate?
     
     var baselineBPM: Int {
@@ -45,6 +49,19 @@ struct ModelBM{
         }
 
         bpm = baselineBPM
+    }
+    
+
+    mutating func togglePlay(){
+        isPlaying.toggle()
+    }
+    
+    mutating func setIsPlaying(_ isIt: Bool){
+        isPlaying = isIt
+    }
+    
+    mutating func setCurrentlyPlayingTrack(track: SpotifyApi.Currently){
+        currentlyPlayingTrack = track
     }
     
     private func calculateChangePercentage(from oldValue: Int, to newValue: Int) -> Double {

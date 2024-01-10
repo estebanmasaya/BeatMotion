@@ -46,10 +46,16 @@ struct MenuView: View {
                     Text("🏃🏻‍♂️🎧").font(.system(size: 70))
                     Spacer()
                     VStack{
-                        NavigationLink(destination: ContentView().onDisappear(){
+
+
+                        NavigationLink(destination: DataPresentationView().onDisappear(){
                             self.theViewModel.endWorkout()
                         }.onAppear(){
                             self.theViewModel.startWorkout()
+                                                      Task{
+                                await theViewModel.startPlaybackInFirstAvailableDevice()
+                                await theViewModel.fetchCurrentlyPlayingTrack()
+                            }  
                         }
                         ){
                             Text("Start Training with dynamic BPM").font(.title)
@@ -87,7 +93,7 @@ struct MenuView: View {
 
                         
                         
-                        NavigationLink(destination: DataPresentationView().onAppear{
+                        NavigationLink(destination: ContentView().onAppear{
                         }
                         ){
                             Text("Choose favourite music genre")
