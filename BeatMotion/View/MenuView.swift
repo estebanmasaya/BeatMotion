@@ -58,21 +58,21 @@ struct MenuView: View {
                             }  
                         }
                         ){
-                            Text("Start Training with dynamic BPM").font(.title)
+                            Text("Start Training with dynamic BPM")
                         }
                         .foregroundColor(Color(red: 66/255, green: 139/255, blue: 221/255))
                         .padding(5)
                         .background(.white)
                         .cornerRadius(8)
                         
-                        NavigationLink(destination: ContentView().onDisappear(){
+                        NavigationLink(destination: DataPresentationView().onDisappear(){
                             self.theViewModel.endWorkout()
                         }.onAppear(){
                             self.theViewModel.setBpm(theViewModel.sliderValue)
                             //start playing songs
                         }
                         ){
-                            Text("Start Training with chosen BPM").font(.title)
+                            Text("Start Training with chosen BPM")
                         }
                         .foregroundColor(Color(red: 66/255, green: 139/255, blue: 221/255))
                         .padding(5)

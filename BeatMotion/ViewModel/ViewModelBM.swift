@@ -32,7 +32,9 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
     
     var currentlyPlayingTrack: SpotifyApi.Currently{
         theModel.currentlyPlayingTrack
-
+        
+    }
+        
     init() {
         theModel = ModelBM()
         workoutManager.delegate = self
@@ -123,6 +125,7 @@ class ViewModelBM: ObservableObject, WorkoutManagerDelegate, ModelBMDelegate{
                 }
 
                 // Fetch currently playing track after forward playback is complete
+                sleep(2)
                 try await group.addTask {
                     do {
                         let currentlyPlaying = try await SpotifyApi.getCurrentlyPlayingTrack(tokenString: self.tokenString)
