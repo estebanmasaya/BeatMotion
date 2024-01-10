@@ -19,11 +19,11 @@ class SpotifyApi{
                  print("Error: \(error)")
                  return
              }
-
+            /*
              if let data = data {
-                 // Process the response data
                  print("Response data: \(String(data: data, encoding: .utf8) ?? "")")
              }
+             */
          }
         task.resume()
 
@@ -124,14 +124,23 @@ class SpotifyApi{
 
 
     static private func createURLRequestRecommendations(tokenString: String, bpm: Int) -> URLRequest?{
+        var localBpm = bpm
         var components = URLComponents()
         components.scheme = "https"
         components.host = SpotifyConstants.apiHost
         components.path = "/v1/recommendations"
+        while localBpm < 70{
+            localBpm *= 2
+        }
+
+        while localBpm > 160{
+            localBpm /= 2
+        }
         
+        print("localBpm= \(localBpm)")
         components.queryItems = [
-        URLQueryItem(name: "min_tempo", value: String(bpm - 5)),
-        URLQueryItem(name: "max_tempo", value: String(bpm + 5)),
+        URLQueryItem(name: "min_tempo", value: String(localBpm - 5)),
+        URLQueryItem(name: "max_tempo", value: String(localBpm + 5)),
         URLQueryItem(name: "seed_genres", value: "work-out,groove,house,pop"),
         URLQueryItem(name: "limit", value: "1")
         ]
@@ -219,12 +228,13 @@ class SpotifyApi{
         
         let decoder = JSONDecoder()
         //let results = try decoder.decode(Response.self, from: data)
-        if let jsonString = String(data: data, encoding: .utf8) {
+        /*if let jsonString = String(data: data, encoding: .utf8) {
             print("Raw JSON Response: \(jsonString)")
         }
+         */
         
         let currentlyPlaying = try decoder.decode(Currently.self, from: data)
-        print("duration: \(currentlyPlaying.item.duration_ms) artist: \(currentlyPlaying.item.artists.map{$0.name}), name: \(currentlyPlaying.item.name), image: \(String(describing: currentlyPlaying.item.album.images.first?.url)) isPlaying: \(currentlyPlaying.is_playing)")
+        //print("duration: \(currentlyPlaying.item.duration_ms) artist: \(currentlyPlaying.item.artists.map{$0.name}), name: \(currentlyPlaying.item.name), image: \(String(describing: currentlyPlaying.item.album.images.first?.url)) isPlaying: \(currentlyPlaying.is_playing)")
         return currentlyPlaying
     }
 
@@ -254,7 +264,8 @@ class SpotifyApi{
         let results = try decoder.decode(Response.self, from: data)
         
         let trackUrl = results.tracks[0].external_urls.spotify
-        print(trackUrl)
+        print("Name: \(results.tracks[0].name)")
+        //print(trackUrl)
         return trackUrl
     }
     
@@ -264,6 +275,7 @@ class SpotifyApi{
     
     struct Track: Codable{
         let external_urls: External_urls
+        let name: String
     }
     
     struct External_urls: Codable{

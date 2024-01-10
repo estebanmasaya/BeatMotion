@@ -56,7 +56,7 @@ struct MenuView: View {
                             self.theViewModel.startWorkout()
                             Task{
                                 await theViewModel.startPlaybackInFirstAvailableDevice()
-                                await theViewModel.fetchCurrentlyPlayingTrackWithTimer()
+                                 theViewModel.fetchCurrentlyPlayingTrackWithTimer()
                                 
                             }
                         }
