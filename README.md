@@ -17,6 +17,9 @@ The iphone implementation to elevate your music while training.
 
 
 
+Implementatio of the Spotify API:
+
+
 <img width="666" alt="image" src="https://github.com/estebanmasaya/BeatMotion/assets/102025901/a5c5e364-41bc-4bac-9a37-168540b085c5">
 
 
