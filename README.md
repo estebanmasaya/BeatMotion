@@ -1,6 +1,6 @@
 BEATMOTION
 
-The iphone implementation to elevate your music while training.
+The iphone implementation to elevate your music while training with use of the Spotify API.
 
 - The integration of the Pedometer to track the cadence of the user.
 
