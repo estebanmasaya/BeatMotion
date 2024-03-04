@@ -1,4 +1,6 @@
-Beatmotion
+BEATMOTION
+
+The iphone implementation to elevate your music while training.
 
 - The integration of the Pedometer to track the cadence of the user.
 
@@ -12,4 +14,9 @@ Beatmotion
 <img width="266" alt="image" src="https://github.com/estebanmasaya/BeatMotion/assets/102025901/3e68afa2-d5b7-41c4-9b70-2071fd20d559">
 
 <img width="267" alt="image" src="https://github.com/estebanmasaya/BeatMotion/assets/102025901/54fab03d-c190-40ce-8642-0367e96906dd">
+
+
+
+<img width="666" alt="image" src="https://github.com/estebanmasaya/BeatMotion/assets/102025901/a5c5e364-41bc-4bac-9a37-168540b085c5">
+
 
